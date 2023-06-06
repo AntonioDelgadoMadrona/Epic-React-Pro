@@ -3,10 +3,17 @@
 
 import * as React from 'react'
 
+const formatCountDebugValue = ({query, state}) =>
+  `query: ${query}, state: ${state}`
+
 function useMedia(query, initialState = false) {
   const [state, setState] = React.useState(initialState)
-  // 🐨 call React.useDebugValue here.
-  // 💰 here's the formatted label I use: `\`${query}\` => ${state}`
+
+  // useDebugValue is a hook that allows us to display a label for custom hooks in React DevTools.
+  // It accepts a value and a formatter function (optional) as arguments.
+  // It only displays in React DevTools.
+  // It is useful for custom hooks that are used in many places in an app.
+  React.useDebugValue({query, state}, formatCountDebugValue)
 
   React.useEffect(() => {
     let mounted = true

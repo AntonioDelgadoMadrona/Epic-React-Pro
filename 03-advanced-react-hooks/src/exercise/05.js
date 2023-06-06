@@ -4,22 +4,23 @@
 import * as React from 'react'
 
 // 🐨 wrap this in a React.forwardRef and accept `ref` as the second argument
-function MessagesDisplay({messages}) {
-  const containerRef = React.useRef()
+const MyMessage = React.forwardRef(function MessagesDisplay({messages}, ref) {
+  const containerRef = React.useRef(null)
+
+  // With the useImperativeHandle hook, you can expose imperative methods to parent components.
+  React.useImperativeHandle(ref, () => ({
+    scrollToTop: () => {
+      containerRef.current.scrollTop = 0
+    },
+    scrollToBottom: () => {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight
+    }
+  }));
+
+  // This useLayoutEffect is for update the pos every time the messages change.
   React.useLayoutEffect(() => {
-    scrollToBottom()
-  })
-
-  // 💰 you're gonna want this as part of your imperative methods
-  // function scrollToTop() {
-  //   containerRef.current.scrollTop = 0
-  // }
-  function scrollToBottom() {
     containerRef.current.scrollTop = containerRef.current.scrollHeight
-  }
-
-  // 🐨 call useImperativeHandle here with your ref and a callback function
-  // that returns an object with scrollToTop and scrollToBottom
+  })
 
   return (
     <div ref={containerRef} role="log">
@@ -31,7 +32,7 @@ function MessagesDisplay({messages}) {
       ))}
     </div>
   )
-}
+})
 
 function App() {
   const messageDisplayRef = React.useRef()
@@ -58,7 +59,7 @@ function App() {
       <div>
         <button onClick={scrollToTop}>scroll to top</button>
       </div>
-      <MessagesDisplay ref={messageDisplayRef} messages={messages} />
+      <MyMessage ref={messageDisplayRef} messages={messages} />
       <div>
         <button onClick={scrollToBottom}>scroll to bottom</button>
       </div>
