@@ -6,7 +6,7 @@ import * as React from 'react'
 // this switch not having properties set correctly, then the
 // problem is probably in your implementation. Tip: Check
 // your `render` method or the `getTogglerProps` method
-// (if we've gotten to that part)
+// (if we have gotten to that part)
 
 // this is here to fill in for the onChange handler
 // we're not using onChange because it seems to behave

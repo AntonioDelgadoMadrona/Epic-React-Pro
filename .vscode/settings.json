@@ -1,0 +1,8 @@
+{
+  "editor.cursorBlinking": "expand",
+  "editor.cursorStyle": "line",
+  "editor.cursorWidth": 3,
+  "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace",
+  "editor.formatOnPaste": false,
+  "editor.linkedEditing": true
+}

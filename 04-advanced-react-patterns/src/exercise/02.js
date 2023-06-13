@@ -1,39 +1,49 @@
 // Compound Components
-// http://localhost:3000/isolated/exercise/02.js
+// It is a component design pattern based on creating a parent component with a single goal,
+// to provide its children with the necessary properties to render smoothly.
 
 import * as React from 'react'
 import {Switch} from '../switch'
 
-function Toggle() {
+// The Toggle component is a wrapper that will provide the context to its children
+// Every child component can be defined in the same file or in a different file
+function Toggle({children}) {
   const [on, setOn] = React.useState(false)
   const toggle = () => setOn(!on)
-
-  // 🐨 replace this with a call to React.Children.map and map each child in
-  // props.children to a clone of that child with the props they need using
-  // React.cloneElement.
-  // 💰 React.Children.map(props.children, child => {/* return child clone here */})
-  // 📜 https://reactjs.org/docs/react-api.html#reactchildren
-  // 📜 https://reactjs.org/docs/react-api.html#cloneelement
-  return <Switch on={on} onClick={toggle} />
+  // This create a clone of the children and pass the props to the children
+  return React.Children.map(children, child => {
+    // If the child is a string/HTML element, we return the string, otherwise we clone the element
+    return typeof child.type === 'string'
+      ? child
+      // The cloneElement function will clone the element and pass the props to the children
+      : React.cloneElement(child, {on, toggle})
+  })
 }
 
-// 🐨 Flesh out each of these components
+// This function is a component
+function ToggleOn({on, children}) {
+  return on ? children : null
+}
 
-// Accepts `on` and `children` props and returns `children` if `on` is true
-const ToggleOn = () => null
+// This function is a component
+function ToggleOff({on, children}) {
+  return on ? null : children
+}
 
-// Accepts `on` and `children` props and returns `children` if `on` is false
-const ToggleOff = () => null
+// This function is a component
+function ToggleButton({on, toggle, ...props}) {
+  return <Switch on={on} onClick={toggle} {...props} />
+}
 
-// Accepts `on` and `toggle` props and returns the <Switch /> with those props.
-const ToggleButton = () => null
-
+// In this case, we are using the Toggle component as a wrapper
+// And we split the ToggleOn, ToggleOff and ToggleButton components
 function App() {
   return (
     <div>
       <Toggle>
         <ToggleOn>The button is on</ToggleOn>
         <ToggleOff>The button is off</ToggleOff>
+        <span>Hello</span>
         <ToggleButton />
       </Toggle>
     </div>
@@ -41,8 +51,3 @@ function App() {
 }
 
 export default App
-
-/*
-eslint
-  no-unused-vars: "off",
-*/
