@@ -1,5 +1,9 @@
 // Code splitting
-// http://localhost:3000/isolated/exercise/01.js
+
+// Code splitting acts on the principle that loading less code will speed
+// up your app. Say for example that we're building a complex dashboard
+// application that includes the venerable d3 library for graphing data.
+// Your users start complaining because it takes too long to load the login screen.
 
 import * as React from 'react'
 // 💣 remove this import

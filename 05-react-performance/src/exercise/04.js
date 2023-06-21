@@ -1,5 +1,14 @@
 // Window large lists with react-virtual
-// http://localhost:3000/isolated/exercise/04.js
+
+// As we learned in the last exercise, React is really optimized at updating
+// the DOM during the commit phase.
+
+// Unfortunately, there's not much React can do if you simply need to make huge updates
+// to the DOM. And as fast as React is in the reconciliation phase, if it has to do that
+// for tens of thousands of elements that's going to take some time ("perf death by a thousand cuts").
+// In addition, our own code that runs during the "render" phase may be fast, but
+// if you have to do that tens of thousands of times, you're going to have a hard
+// time being fast on low-end devices.
 
 import * as React from 'react'
 // 🐨 import the useVirtual hook from react-virtual

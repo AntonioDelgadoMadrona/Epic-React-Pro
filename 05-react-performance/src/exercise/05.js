@@ -1,5 +1,8 @@
 // Optimize context value
-// http://localhost:3000/isolated/exercise/05.js
+
+// The way that context works is that whenever the provided value changes
+// from one render to another, it triggers a re-render of all the consuming
+// components (which will re-render whether or not they're memoized).
 
 import * as React from 'react'
 import {

@@ -1,5 +1,13 @@
 // Fix "perf death by a thousand cuts"
-// http://localhost:3000/isolated/exercise/06.js
+// When you're building a sizable real-world application, you're typically going to
+// need some sort of state management solution. Whatever state management solution
+// you're using, often you can run into a problem that I call "perf death by
+// a thousand cuts" which basically means that so many components are updated when
+// state changes that it becomes a performance bottleneck.
+
+// Sometimes performance problems are because a single component is doing something
+// it shouldn't (running too much code on an interaction). Those are typically easier
+// to deal with because you can quickly identify the problem and determine a good solution.
 
 import * as React from 'react'
 import {

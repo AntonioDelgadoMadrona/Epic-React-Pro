@@ -1,5 +1,8 @@
 // useMemo for expensive calculations
-// http://localhost:3000/isolated/exercise/02.js
+
+// React hooks are amazing. Being able to put all the logic and state management
+// within a function component (the "render method" equivalent for a class)
+// allows for mind blowing composability.
 
 import * as React from 'react'
 import {useCombobox} from '../use-combobox'
